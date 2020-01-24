@@ -14,9 +14,9 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form action="CrawlServlet">
-                <input type="submit" value="Crawl" name="Crawlbtn" style="width: 50px;height: 50px"/>
-            </form>
+            <s:form action="Crawl">
+                <s:submit name="Crawl"/>
+            </s:form>
             <s:if test="statusList!=null">
                 <table>
                     <thead>
