@@ -17,24 +17,27 @@ and open the template in the editor.
             <form action="CrawlServlet">
                 <input type="submit" value="Crawl" name="Crawlbtn" style="width: 50px;height: 50px"/>
             </form>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Id</th>
-                        <th>Message</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <s:iterator value="statusList" status="count" var="status">
+            <s:if test="statusList!=null">
+                <table>
+                    <thead>
                         <tr>
-                            <td><s:property value="%{#count.count}"/></td>
-                            <td><s:property value="statusId"/></td>
-                            <td><s:property value="statusMessage"/></td>
+                            <th>No.</th>
+                            <th>Id</th>
+                            <th>Message</th>
                         </tr>
-                    </s:iterator>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                        <s:iterator value="statusList" status="count" var="status">
+                            <tr>
+                                <td><s:property value="%{#count.count}"/></td>
+                                <td><s:property value="statusId"/></td>
+                                <td><s:property value="statusMessage"/></td>
+                            </tr>
+                        </s:iterator>
+                    </tbody>
+                </table>
+            </s:if>
         </div>
     </body>
 </html>
