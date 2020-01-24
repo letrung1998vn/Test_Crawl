@@ -7,10 +7,19 @@ package Crawl;
  */
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 
 /**
  *
@@ -31,7 +40,19 @@ public class CrawlServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+        try {
+            Twitter twitter = TwitterFactory.getSingleton();
+            Query query = new Query("mai hương");
+            QueryResult result = twitter.search(query);
+            for (Status status : result.getTweets()) {
+                System.out.println("@" + status.getId() + ":" + status.getText());
+            }
+        } catch (TwitterException ex) {
+            Logger.getLogger(CrawlServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.forward(request, response);
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
