@@ -7,6 +7,8 @@ package Crawl;
  */
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -44,8 +46,10 @@ public class CrawlServlet extends HttpServlet {
             Twitter twitter = TwitterFactory.getSingleton();
             Query query = new Query("mai hương");
             QueryResult result = twitter.search(query);
+            List<TestStatus> statusList = new ArrayList<TestStatus>();
             for (Status status : result.getTweets()) {
-                System.out.println("@" + status.getId() + ":" + status.getText());
+//                System.out.println("@" + status.getId() + ":" + status.getText());
+                statusList.add(new TestStatus("id:" + status.getId(),"Text:"+ status.getText()));
             }
         } catch (TwitterException ex) {
             Logger.getLogger(CrawlServlet.class.getName()).log(Level.SEVERE, null, ex);
